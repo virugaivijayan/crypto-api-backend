@@ -1,3 +1,11 @@
+const express = require('express');
+const cors = require('cors');
+
+const app = express(); // ✅ IMPORTANT – Fixes 'app is not defined'
+
+const PORT = process.env.PORT || 8080;
+app.use(cors());
+
 app.get("/api/signal/:symbol", (req, res) => {
   const { symbol } = req.params;
 
@@ -44,4 +52,12 @@ app.get("/api/signal/:symbol", (req, res) => {
   }
 
   res.json(response);
+});
+
+app.get("/", (req, res) => {
+  res.send("Crypto API is running!");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
